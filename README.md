@@ -1,5 +1,6 @@
 # django-e-commerce
 Bu projemde Python ve Django ile e-ticaret sitesi geliştiriyorum. Projeye devam etmekteyim.
+
 Anasayfa:
 
 ![Preview](https://github.com/batuhanyasayan/django-e-commerce/blob/main/screenshots/homepage-1.png)
