@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block body %}
+
+<section class="vh-100" style="background-color: #f4f5f7;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-6 mb-4 mb-lg-0 w-auto">
+          <div class="card mb-3" style="border-radius: .5rem;">
+            <div class="row g-0">
+                <div class="col-md-4 gradient-custom text-center text-white d-flex flex-column align-items-center"
+                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <img src="{{appMy_profile.profile_img.url}}"
+                    alt="Avatar" class="img-fluid my-5 rounded-circle" style="width: 200px; height: 200px;" />
+                    <h5 class="text-black">{{request.user.first_name}} {{request.user.last_name}}</h5>
+                    <label class="text-black" for="">Profil Fotoğrafını Değiştir</label>
+                    <input type="file" name="profile-img" class="form-control" id="customFile" >
+                    <button name="profile-img-btn" type="submit" class="btn gradient-custom-2 mb-3 mt-2" >Kaydet</button>
+                </form>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <h4>Kişisel Bilgiler</h4>
+                  <hr class="mt-0 mb-4">
+                  <form action="" method="POST">
+                  <div class="row pt-1">
+                        {% csrf_token %}
+                        <div class="col-6 mb-3 d-flex flex-column">
+                            <label>Kullanıcı Adı:</label>
+                            <input type="text" name="username" class="rounded-3 w-50 text-center" value="{{request.user.username}}" >
+                        </div>
+                        <div class="col-6 mb-3 d-flex flex-column">
+                            <label>İsim:</label>
+                            <input type="text" name="firstname" class="rounded-3 w-50 text-center" value="{{request.user.first_name}}">
+                        </div>
+                        <div class="col-6 mb-3 d-flex flex-column">
+                            <label>Soyisim:</label>
+                            <input type="text" name="lastname" class="rounded-3 w-50 text-center" value="{{request.user.last_name}}">
+                        </div>
+                        <div class="col-6 mb-3 d-flex flex-column">
+                            <label>E-mail:</label>
+                            <input type="text" name="email" class="rounded-3 w-50 text-center" value="{{request.user.email}}">
+                        </div>
+                        <button name ="person-btn" type="submit" style="width: fit-content;" class="mb-5 btn gradient-custom-2 mb-3" >Değişiklikleri Kaydet</button>
+                    </div>
+                </form>
+                  <h4>Beğendiklerim</h4>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Recent</h6>
+                      <p class="text-muted">Lorem ipsum</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Most Viewed</h6>
+                      <p class="text-muted">Dolor sit amet</p>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-start">
+                    <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                    <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                    <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+{% endblock body %}

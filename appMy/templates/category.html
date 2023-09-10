@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'img/s1.png' %}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'img/s2.png' %}" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div class="prod row w-100 d-flex align-items-center justify-content-center m-0 p-5">
+    {% for i in product %}
+    <div class="col-md-3 col-sm-6 p-5">
+        <div class="product-grid">
+            <div class="product-image">
+                <a href="/detail/{{i.id}}/" class="image">
+                    <img class="pic-1" src="{{i.productImg.url}}">
+                    <img class="pic-2" src="{{i.productImg2.url}}">
+                </a>
+                <ul class="product-links">
+                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                    <li><a href="#"><i class="far fa-heart"></i></a></li>
+                    <li><a href="/detail/{{i.id}}/"><i class="fa fa-search"></i></a></li>
+                </ul>
+            </div>
+            <div class="product-content d-flex flex-column justify-content-center">
+                <h3 class="title fs-4"><a href="#">{{i.title}}</a></h3>
+                <div class="price">₺{{i.productPrice}}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock body %}
