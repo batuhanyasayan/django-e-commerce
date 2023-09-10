@@ -39,8 +39,10 @@
                         </div>
                     </div>
                     <div class="buttons d-flex flex-row mt-5 gap-3">
-                        <button class="btn btn-outline-dark">Satın Al</button>
+                      <form action="{% url 'addProduct' id=product.id %}" method="POST">
+                        {% csrf_token %}
                         <button class="btn btn-dark">Sepete Ekle</button>
+                      </form>
                     </div>
                 </div>
             </div>

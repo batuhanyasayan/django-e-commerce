@@ -1,11 +1,20 @@
 from django.shortcuts import render, redirect
 from .models import *
 from django.contrib.auth import login,logout,authenticate
+from django.db.models import Q
 # Create your views here.
 def index(request):
     
     product = Product.objects.all()
     category = Category.objects.all()
+    
+    query = request.GET.get('q')
+    if query:
+        product = product.filter(
+            Q(title__icontains=query) |
+            Q(desc__icontains=query) |
+            Q(productCategory__title__icontains=query)
+        ).distinct
     
     context = {
         'product': product,
@@ -44,6 +53,50 @@ def category(request, id):
     }
     
     return render(request, 'category.html', context)
+
+def addProduct(request,id):
+    
+    product = Product.objects.get(id=id)
+    user = request.user
+    cart = Cart.objects.create(user=user,product=product,piece=1, allprice = product.productPrice)
+    
+    cart.save()
+    return redirect('cart')
+    
+def shopping(request):
+    
+    category = Category.objects.all()
+    cart = Cart.objects.filter(user=request.user)
+    total = 0
+    
+    for item in cart:
+        total+=item.product.productPrice * item.piece
+    
+    context = {
+        'cart':cart,
+        'total':total,
+        'category': category
+    }
+    return render(request,'shopping.html',context)
+
+def deleteProduct (request,id):
+    
+    if request.method =='POST':
+        cart_item = Cart.objects.get(id=id)
+        cart_item.delete()
+        
+        return redirect('cart')
+    
+def updateProduct(request,id):
+    
+    if request.method == 'POST':
+        cart_item =Cart.objects.get(id=id)
+        quantity = int(request.POST.get('quantity',1))
+        cart_item.piece =quantity
+        cart_item.allprice = cart_item.product.productPrice * quantity
+        cart_item.save()
+        
+        return redirect('cart')
 
 def signin(request):
     if request.method == 'POST':

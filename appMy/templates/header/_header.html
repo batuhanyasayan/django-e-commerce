@@ -20,7 +20,7 @@
           </a>
           <ul class="dropdown-menu">
             {% for i in category %}
-            <li><a class="dropdown-item" href="/category/{{i.id}}">{{i.title}}</a></li>
+            <li><a class="dropdown-item" href="/category/{{i.id}}/">{{i.title}}</a></li>
             {% endfor %}
           </ul>
         </li>
@@ -28,8 +28,8 @@
 
       <div class="search-and-icons">
 
-        <form class="d-flex mb-2 me-2" role="search">
-          <input class="form-control me-2" type="search" aria-label="Search">
+        <form class="d-flex mb-2 me-2" role="search" method="GET" action="{% url 'homepage' %}">
+          <input class="form-control me-2" type="search" aria-label="Search" name="q">
         </form>
 
         <div class="user-icons d-flex mb-2">
@@ -67,7 +67,7 @@
           </div>
           {% endif %}
           <div class="wishlist"><a href=""><i class="fas fa-heart fa-xl text-danger"></i></a></div>
-          <div class="cart"><a href=""><i class="fas fa-cart-shopping fa-xl text-success"></i></a></div>
+          <div class="cart"><a href="/cart/"><i class="fas fa-cart-shopping fa-xl text-success"></i></a></div>
         </div>
       </div>
 

@@ -35,3 +35,10 @@ class Comment(models.Model):
     user = models.ForeignKey(User, verbose_name=("Kullanıcı"), on_delete=models.CASCADE, null=True, blank=True)
     productComment = models.TextField(("Ürün Yorumu"))
     commentTime = models.DateTimeField(("Yorum Zamanı"), auto_now=False, auto_now_add=True)
+
+# Cart Model
+class Cart(models.Model):
+    product = models.ForeignKey(Product, verbose_name=("Ürün"), on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name=("Kullanıcı"), on_delete=models.CASCADE)
+    piece = models.PositiveIntegerField(("Adet"),default=1)
+    allprice = models.FloatField(("Toplam Fiyat"))
