@@ -31,8 +31,10 @@ def detail(request, id):
     
     if request.method == 'POST':
         comment = request.POST["comment"]
-        com = Comment(productComment=comment, product_id=id)
+        com = Comment(productComment=comment, product_id=id, user= request.user )
         com.save()
+        
+        return redirect('/detail/' + id + '/')
         
     context = {
         'product': product,
